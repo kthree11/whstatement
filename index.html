@@ -18,11 +18,13 @@
 	}
 	.textblock {
 		position: absolute;
-		top: 120px;
+		top: 100px;
 		left: 120px;
 		color: white;
-		font-size: 34px;
+		
 		max-width: 860px;
+		height: 295px;
+		overflow: hidden;
 	}
   </style>
 
@@ -46,15 +48,15 @@
       <div class="col-lg-12 text-center">
         <h1 class="mt-5">An official statement from President Donald J. Trump:</h1>
 		<div style="height: 30px;"></div>
-        <div class="textcontain">		
+        <div class="textcontain" z-index="1">		
 			<img src="bkgd.jpg" alt="background" style="width:100%;" />
-			<div class="textblock" name="tb" id="tb">
+			<div class="textblock" name="tb" id="tb" z-index="2">
 			
 			</div>
 		</div>
 		<div style="height: 30px;"></div>
 		<p>Enter your statement here:</p>
-		<textarea name="sm" class="sm" rows="5" cols="80" id="sm" onkeyup="javascript:keyup();"></textarea>
+		<textarea name="sm" class="sm" rows="5" cols="80" id="sm" onkeyup="javascript:keyup();" z-index="99999"></textarea>
       </div>
     </div>
   </div>
@@ -64,9 +66,18 @@
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 	<script language="javascript">
 		function keyup() {
-			var tb = document.getElementById("tb");
-			var sm = document.getElementById("sm");
-			tb.innerHTML = sm.value;
+			var tb = document.getElementById("tb");		
+			var mytext = document.getElementById("sm").value;
+			if (mytext.length < 399) {
+				tb.style.fontSize = "34px";
+			}
+			else if (mytext.length < 500) {
+				tb.style.fontSize = "24px";
+			}
+			else {
+				tb.style.fontSize = "15px";
+			}
+			tb.innerHTML = mytext;
 		}
 	</script>
 </body>
